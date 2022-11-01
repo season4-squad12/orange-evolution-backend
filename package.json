@@ -1,0 +1,24 @@
+{
+  "name": "orange-evolution-backend",
+  "version": "1.0.0",
+  "description": "projeto hackathon squad 12",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/season4-squad12/orange-evolution-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/season4-squad12/orange-evolution-backend/issues"
+  },
+  "homepage": "https://github.com/season4-squad12/orange-evolution-backend#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sequelize-cli": "^6.5.2"
+  }
+}
