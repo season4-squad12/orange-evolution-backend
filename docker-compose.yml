@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   db:
-    container_name: localhost
+    container_name: localhostPostgres
     image: postgres
     restart: always
     environment:
