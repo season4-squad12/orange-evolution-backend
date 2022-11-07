@@ -55,4 +55,15 @@ const createUser = async (body: IBody) => {
   return newUser;
 };
 
-export default { getUserAll, getUser, createUser, getUserRole };
+const updateUser = async (body: IBody, id: number) => {
+  const { name, lastName, email, role } = body;
+  const upUser = await User.update({
+    name,
+    lastName,
+    email,
+    role,
+  }, { where: { id } });
+  return upUser;
+};
+
+export default { getUserAll, getUser, createUser, getUserRole, updateUser };

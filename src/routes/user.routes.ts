@@ -13,14 +13,19 @@ userRoutes.get(
   controller.getUser,
 );
 
+userRoutes.get(
+  '/usersrole/:role',
+  controller.getUserRole,
+);
+
 userRoutes.post(
   '/users',
   controller.createUser,
 );
 
-userRoutes.get(
-  '/usersrole/:role',
-  controller.getUserRole,
+userRoutes.put(
+  '/users/:id',
+  controller.updateUser,
 );
 
 export default userRoutes;

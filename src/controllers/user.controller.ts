@@ -52,4 +52,15 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
-export default { getAllusers, getUser, createUser, getUserRole };
+const updateUser = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { body } = req;
+  try {
+    const upUser = await userService.updateUser(body, Number(id));
+    if (upUser) res.status(201).json({ sucess: 'user updated successfully' });
+  } catch (error) {
+    res.status(500).json({ error: ResponseHTTP.errorServer });
+  }
+};
+
+export default { getAllusers, getUser, createUser, getUserRole, updateUser };
