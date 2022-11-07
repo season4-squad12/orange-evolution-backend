@@ -13,4 +13,9 @@ userRoutes.get(
   controller.getUser,
 );
 
+userRoutes.post(
+  '/users',
+  controller.createUser,
+);
+
 export default userRoutes;

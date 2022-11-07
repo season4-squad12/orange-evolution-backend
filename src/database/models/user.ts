@@ -34,7 +34,7 @@ User.init({
 }, {
   sequelize: db,
   modelName: 'user',
-  timestamps: false,
+  timestamps: true,
 });
 
 export default User;
