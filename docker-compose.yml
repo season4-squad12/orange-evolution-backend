@@ -7,8 +7,8 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: 123
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123abc
       POSTGRES_DB: orange-db
     ports:
       - "5432:5432"
