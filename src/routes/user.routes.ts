@@ -2,14 +2,15 @@ import { Router } from 'express';
 import controller from '../controllers/user.controller';
 
 const userRoutes = Router();
+const routeUser = '/users/:id';
 
 userRoutes.get(
-  '/users',
+  routeUser,
   controller.getAllusers,
 );
 
 userRoutes.get(
-  '/users/:id',
+  routeUser,
   controller.getUser,
 );
 
@@ -24,8 +25,13 @@ userRoutes.post(
 );
 
 userRoutes.put(
-  '/users/:id',
+  routeUser,
   controller.updateUser,
+);
+
+userRoutes.delete(
+  routeUser,
+  controller.deleteUser,
 );
 
 export default userRoutes;

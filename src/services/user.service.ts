@@ -66,4 +66,9 @@ const updateUser = async (body: IBody, id: number) => {
   return upUser;
 };
 
-export default { getUserAll, getUser, createUser, getUserRole, updateUser };
+const deleteUser = async (id: number) => {
+  const upUser = await User.destroy({ where: { id } });
+  return upUser;
+};
+
+export default { getUserAll, getUser, createUser, getUserRole, updateUser, deleteUser };

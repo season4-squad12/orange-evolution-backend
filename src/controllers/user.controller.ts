@@ -57,10 +57,20 @@ const updateUser = async (req: Request, res: Response) => {
   const { body } = req;
   try {
     const upUser = await userService.updateUser(body, Number(id));
-    if (upUser) res.status(201).json({ sucess: 'user updated successfully' });
+    if (upUser) res.status(201).json({ success: 'user updated successfully' });
   } catch (error) {
     res.status(500).json({ error: ResponseHTTP.errorServer });
   }
 };
 
-export default { getAllusers, getUser, createUser, getUserRole, updateUser };
+const deleteUser = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const delUser = await userService.deleteUser(Number(id));
+    if (delUser) res.status(201).json({ success: 'user deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: ResponseHTTP.errorServer });
+  }
+};
+
+export default { getAllusers, getUser, createUser, getUserRole, updateUser, deleteUser };
