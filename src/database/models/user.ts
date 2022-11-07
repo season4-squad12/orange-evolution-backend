@@ -24,7 +24,7 @@ User.init({
   },
   password: {
     type: STRING,
-    allowNull: false,
+    allowNull: true,
   },
   role: {
     type: ENUM('admin', 'student'),
