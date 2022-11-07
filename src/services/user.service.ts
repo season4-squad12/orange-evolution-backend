@@ -6,17 +6,36 @@ interface IBody {
   lastName: string,
   email: string,
   password: string,
-  role: string
+  role: string,
 }
 
 const getUserAll = async (): Promise <User[]> => {
-  const users = await User.findAll();
+  const users = await User.findAll({
+    attributes: {
+      exclude: ['password'],
+    },
+  });
   return users as User[];
 };
 
 const getUser = async (id: number): Promise <User> => {
-  const user = await User.findOne({ where: { id } });
+  const user = await User.findOne({
+    where: { id },
+    attributes: {
+      exclude: ['password'],
+    },
+  });
   return user as User;
+};
+
+const getUserRole = async (role: string): Promise <User[]> => {
+  const users = await User.findAll({
+    where: { role },
+    attributes: {
+      exclude: ['password'],
+    },
+  });
+  return users as User[];
 };
 
 const createUser = async (body: IBody) => {
@@ -33,9 +52,7 @@ const createUser = async (body: IBody) => {
     role,
   });
 
-  console.log(newUser);
-
   return newUser;
 };
 
-export default { getUserAll, getUser, createUser };
+export default { getUserAll, getUser, createUser, getUserRole };

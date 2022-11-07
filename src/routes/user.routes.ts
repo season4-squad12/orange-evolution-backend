@@ -18,4 +18,9 @@ userRoutes.post(
   controller.createUser,
 );
 
+userRoutes.get(
+  '/usersrole/:role',
+  controller.getUserRole,
+);
+
 export default userRoutes;
