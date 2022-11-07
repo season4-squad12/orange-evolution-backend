@@ -5,4 +5,9 @@ const getUserAll = async (): Promise <User[]> => {
   return users as User[];
 };
 
-export default getUserAll;
+const getUser = async (id: number): Promise <User> => {
+  const user = await User.findOne({ where: { id } });
+  return user as User;
+};
+
+export default { getUserAll, getUser };

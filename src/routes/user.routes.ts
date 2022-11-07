@@ -5,7 +5,12 @@ const userRoutes = Router();
 
 userRoutes.get(
   '/users',
-  controller,
+  controller.getAllusers,
+);
+
+userRoutes.get(
+  '/users/:id',
+  controller.getUser,
 );
 
 export default userRoutes;
