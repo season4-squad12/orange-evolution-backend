@@ -1,10 +1,11 @@
 import { Model, INTEGER, STRING } from 'sequelize';
 import db from '.';
-import subtrails from './subtrail';
-import User from './user';
+import Content from './content';
+import Trail from './trail';
 
-class Trail extends Model {}
-Trail.init({
+class Subtrail extends Model {}
+
+Subtrail.init({
   id: {
     type: INTEGER,
     allowNull: false,
@@ -21,20 +22,20 @@ Trail.init({
   },
 }, {
   sequelize: db,
-  modelName: 'Trail',
+  modelName: 'subtrail',
   timestamps: true,
 });
 
-Trail.belongsToMany(User, {
-  through: 'user_trails',
-  as: 'user',
-  foreignKey: 'idTrail',
-});
-
-Trail.belongsToMany(subtrails, {
+Subtrail.belongsToMany(Trail, {
   through: 'trail_subtrails',
   as: 'subtrilhas',
-  foreignKey: 'idTrail',
+  foreignKey: 'idSubtrail',
 });
 
-export default Trail;
+Subtrail.belongsToMany(Content, {
+  through: 'trail_subtrails',
+  as: 'conteúdos',
+  foreignKey: 'idSubtrail',
+});
+
+export default Subtrail;

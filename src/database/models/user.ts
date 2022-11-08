@@ -1,5 +1,6 @@
 import { Model, INTEGER, STRING, ENUM } from 'sequelize';
 import db from '.';
+import Trail from './trail';
 
 class User extends Model {}
 
@@ -35,6 +36,12 @@ User.init({
   sequelize: db,
   modelName: 'user',
   timestamps: true,
+});
+
+User.belongsToMany(Trail, {
+  through: 'user_trails',
+  as: 'trilhas',
+  foreignKey: 'idUser',
 });
 
 export default User;

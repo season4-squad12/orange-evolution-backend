@@ -12,12 +12,12 @@ interface QueryRole extends Request {
 }
 
 const getAllusers = async (_req: Request, res: Response) => {
-  try {
+  /* try { */
     const users = await userService.getUserAll();
     res.status(201).json(users);
-  } catch (error) {
+  /* } catch (error) {
     res.status(500).json({ error: ResponseHTTP.errorServer });
-  }
+  } */
 };
 
 const getUser = async (req: Request, res: Response) => {
