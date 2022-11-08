@@ -1,7 +1,7 @@
+/* eslint-disable import/no-cycle */
 import { Model, INTEGER, STRING } from 'sequelize';
 import db from '.';
-import subtrails from './subtrail';
-import User from './user';
+import Subtrail from './subtrail';
 
 class Trail extends Model {}
 Trail.init({
@@ -21,20 +21,20 @@ Trail.init({
   },
 }, {
   sequelize: db,
-  modelName: 'Trail',
+  modelName: 'trail',
   timestamps: true,
 });
 
-Trail.belongsToMany(User, {
-  through: 'user_trails',
-  as: 'user',
-  foreignKey: 'idTrail',
-});
-
-Trail.belongsToMany(subtrails, {
+Trail.belongsToMany(Subtrail, {
   through: 'trail_subtrails',
   as: 'subtrilhas',
   foreignKey: 'idTrail',
+});
+
+Subtrail.belongsToMany(Trail, {
+  through: 'trail_subtrails',
+  as: 'trilhas',
+  foreignKey: 'idSubtrail',
 });
 
 export default Trail;

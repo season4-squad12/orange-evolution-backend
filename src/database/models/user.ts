@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { Model, INTEGER, STRING, ENUM } from 'sequelize';
 import db from '.';
 import Trail from './trail';
@@ -42,6 +43,12 @@ User.belongsToMany(Trail, {
   through: 'user_trails',
   as: 'trilhas',
   foreignKey: 'idUser',
+});
+
+Trail.belongsToMany(User, {
+  through: 'user_trails',
+  as: 'usuários',
+  foreignKey: 'idTrail',
 });
 
 export default User;
