@@ -5,7 +5,7 @@ const userRoutes = Router();
 const routeUser = '/users/:id';
 
 userRoutes.get(
-  routeUser,
+  '/users',
   controller.getAllusers,
 );
 
