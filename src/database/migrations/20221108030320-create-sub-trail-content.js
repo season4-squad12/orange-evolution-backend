@@ -5,10 +5,16 @@ module.exports = {
     await queryInterface.createTable('subTrail_contents', {
       
       idSubtrail: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'subtrails', key: 'id' },
+        onDelete: 'CASCADE',
+        allowNull: false,
       },
       idContent: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'contents', key: 'id' },
+        onDelete: 'CASCADE',
+        allowNull: false,
       }
     });
   },

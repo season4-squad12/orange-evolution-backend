@@ -1,4 +1,5 @@
 import { genSalt, hash } from 'bcryptjs';
+import Trail from '../database/models/trail';
 import User from '../database/models/user';
 
 interface IBody {
@@ -12,8 +13,18 @@ interface IBody {
 const getUserAll = async (): Promise <User[]> => {
   const users = await User.findAll({
     attributes: {
-      exclude: ['password'],
+      exclude: ['password', 'createdAt', 'updatedAt'],
     },
+    include: [
+      {
+        model: Trail,
+        as: 'trilhas',
+        through: { attributes: [] },
+        attributes: {
+          exclude: ['createdAt', 'updatedAt'],
+        },
+      },
+    ],
   });
   return users as User[];
 };
@@ -24,6 +35,16 @@ const getUser = async (id: number): Promise <User> => {
     attributes: {
       exclude: ['password'],
     },
+    include: [
+      {
+        model: Trail,
+        as: 'trilhas',
+        through: { attributes: [] },
+        attributes: {
+          exclude: ['createdAt', 'updatedAt'],
+        },
+      },
+    ],
   });
   return user as User;
 };
@@ -34,6 +55,16 @@ const getUserRole = async (role: string): Promise <User[]> => {
     attributes: {
       exclude: ['password'],
     },
+    include: [
+      {
+        model: Trail,
+        as: 'trilhas',
+        through: { attributes: [] },
+        attributes: {
+          exclude: ['createdAt', 'updatedAt'],
+        },
+      },
+    ],
   });
   return users as User[];
 };
