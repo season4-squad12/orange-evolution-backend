@@ -1,4 +1,4 @@
-import subtrails from '../database/models/subtrails';
+import subtrails from '../database/models/subtrail';
 import trail from '../database/models/trail';
 
 const getTrailAll = async (): Promise <trail[]> => {

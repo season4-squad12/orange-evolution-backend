@@ -14,12 +14,12 @@ Trail.init({
   name: {
     type: STRING,
     allowNull: false,
-  },  
-  description:{
+  },
+  description: {
     type: STRING,
     allowNull: false,
-  }
-  }, {
+  },
+}, {
   sequelize: db,
   modelName: 'trail',
   timestamps: true,
