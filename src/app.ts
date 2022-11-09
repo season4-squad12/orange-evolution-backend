@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as cors from 'cors';
 import userRoutes from './routes/user.routes';
+import trailRoutes from './routes/trail.routes';
 
 const app = express();
 
@@ -15,5 +16,6 @@ app.use(express.json());
 app.use(accessControl);
 app.use(cors());
 app.use(userRoutes);
+app.use(trailRoutes);
 
 export default app;
