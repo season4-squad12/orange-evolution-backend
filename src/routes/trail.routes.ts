@@ -8,4 +8,14 @@ trailRoutes.get(
   trailController.getTrailAll,
 );
 
+trailRoutes.get(
+  '/trails/:id',
+  trailController.getTrail,
+);
+
+trailRoutes.delete(
+  '/trails/:id',
+  trailController.deleteTrail,
+);
+
 export default trailRoutes;
