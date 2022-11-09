@@ -1,6 +1,11 @@
 import subtrails from '../database/models/subtrail';
 import trail from '../database/models/trail';
 
+interface IBody {
+  name: string,
+  description: string,
+}
+
 const getTrailAll = async (): Promise<trail[]> => {
   const trails = await trail.findAll({
     attributes: {
@@ -40,6 +45,15 @@ const getTrail = async (id: number): Promise<trail> => {
   return trailResult as trail;
 };
 
+const createTrail = async (body: IBody) => {
+  const { name, description } = body;
+  const trailResult = await trail.create({
+    name,
+    description,
+  });
+  return trailResult;
+};
+
 const deleteTrail = async (id: number) => {
   const trailResult = await trail.findOne({ where: { id } });
   if (!trailResult) return false;
@@ -49,4 +63,15 @@ const deleteTrail = async (id: number) => {
   return delTrail;
 };
 
-export default { getTrailAll, getTrail, deleteTrail };
+const updateTrail = async (id: number, body: IBody) => {
+  const { name, description } = body;
+  const upTrail = await trail.update({
+    name,
+    description,
+  }, {
+    where: { id },
+  });
+  return upTrail;
+};
+
+export default { getTrailAll, getTrail, createTrail, deleteTrail, updateTrail };

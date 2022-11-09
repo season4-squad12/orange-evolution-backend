@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import trailController from '../controllers/trail.controller';
 
+const routeTrailId = '/trails/:id';
 const trailRoutes = Router();
 
 trailRoutes.get(
@@ -9,13 +10,23 @@ trailRoutes.get(
 );
 
 trailRoutes.get(
-  '/trails/:id',
+  routeTrailId,
   trailController.getTrail,
 );
 
 trailRoutes.delete(
-  '/trails/:id',
+  routeTrailId,
   trailController.deleteTrail,
+);
+
+trailRoutes.put(
+  routeTrailId,
+  trailController.updateTrail,
+);
+
+trailRoutes.post(
+  '/trails',
+  trailController.createTrail,
 );
 
 export default trailRoutes;
