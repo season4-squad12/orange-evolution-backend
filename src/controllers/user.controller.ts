@@ -43,13 +43,9 @@ const getUserRole = async (req: QueryRole, res: Response) => {
 };
 
 const createUser = async (req: Request, res: Response) => {
-  const { body } = req;
-  try {
-    const newUser = await userService.createUser(body);
-    res.status(201).json(newUser);
-  } catch (error) {
-    res.status(500).json({ error: ResponseHTTP.errorServer });
-  }
+  const { trails, ...data } = req.body;
+  const newUser = await userService.createUser(trails, data);
+  res.status(201).json(newUser);
 };
 
 const updateUser = async (req: Request, res: Response) => {

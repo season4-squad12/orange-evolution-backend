@@ -1,6 +1,7 @@
 import { genSalt, hash } from 'bcryptjs';
 import Trail from '../database/models/trail';
 import User from '../database/models/user';
+import UserTrail from '../database/models/userTrail';
 
 interface IBody {
   name: string,
@@ -69,7 +70,21 @@ const getUserRole = async (role: string): Promise <User[]> => {
   return users as User[];
 };
 
-const createUser = async (body: IBody) => {
+const createAssociateUserTrail = async (idUser: number, trails: number[]) => {
+  trails.map(async (idTrail) => {
+    const exists = await UserTrail.findOne({
+      where: {
+        $or: [{ idUser }, { idTrail }],
+      },
+    });
+    console.log(exists);
+    if (!exists) {
+      await UserTrail.create({ idUser, idTrail });
+    }
+  });
+};
+
+const createUser = async (trails: number[], body: IBody): Promise <User> => {
   const { name, lastName, email, password, role } = body;
 
   const salt = await genSalt(10);
@@ -81,6 +96,12 @@ const createUser = async (body: IBody) => {
     email,
     password: newPassword,
     role,
+  });
+
+  const idUser = newUser.getDataValue('id');
+
+  trails.map(async (idTrail) => {
+    await UserTrail.create({ idUser, idTrail });
   });
 
   return newUser;
@@ -102,4 +123,5 @@ const deleteUser = async (id: number) => {
   return upUser;
 };
 
-export default { getUserAll, getUser, createUser, getUserRole, updateUser, deleteUser };
+export default {
+  getUserAll, getUser, createUser, getUserRole, updateUser, deleteUser, createAssociateUserTrail };
