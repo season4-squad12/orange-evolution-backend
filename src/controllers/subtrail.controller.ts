@@ -19,4 +19,11 @@ const createSubtrail = async (req: Request, res: Response) => {
   res.status(201).json(trail);
 };
 
-export default { getSubtrailAll, getSubtrail, createSubtrail };
+const deleteSubtrail = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const subtrail = await subtrailService.deleteSubtrail(Number(id));
+  if (subtrail) res.status(201).json({ success: 'Subtrail deleted successfully' });
+  res.status(404).json({ error: 'Trail not found' });
+};
+
+export default { getSubtrailAll, getSubtrail, createSubtrail, deleteSubtrail };

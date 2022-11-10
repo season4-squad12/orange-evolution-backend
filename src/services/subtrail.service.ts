@@ -55,4 +55,13 @@ const createSubtrail = async (body: IBody) => {
   return subtrailResult;
 };
 
-export default { getSubtrailAll, getSubtrail, createSubtrail };
+const deleteSubtrail = async (id: number) => {
+  const subtrailResult = await subtrail.findOne({ where: { id } });
+  if (!subtrailResult) return false;
+  const delSubtrail = await subtrail.destroy({
+    where: { id },
+  });
+  return delSubtrail;
+};
+
+export default { getSubtrailAll, getSubtrail, createSubtrail, deleteSubtrail };

@@ -19,4 +19,9 @@ subtrailRoutes.post(
   subtrailController.createSubtrail,
 );
 
+subtrailRoutes.delete(
+  routeSubtrailId,
+  subtrailController.deleteSubtrail,
+);
+
 export default subtrailRoutes;
