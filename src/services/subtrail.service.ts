@@ -6,7 +6,6 @@ interface IBody {
   description: string,
 }
 
-// Get para todas subtrails
 const getSubtrailAll = async (): Promise<subtrail[]> => {
   const subtrails = await subtrail.findAll({
     attributes: {
@@ -64,4 +63,15 @@ const deleteSubtrail = async (id: number) => {
   return delSubtrail;
 };
 
-export default { getSubtrailAll, getSubtrail, createSubtrail, deleteSubtrail };
+const updateSubtrail = async (id: number, body: IBody) => {
+  const { name, description } = body;
+  const upSubtrail = await subtrail.update({
+    name,
+    description,
+  }, {
+    where: { id },
+  });
+  return upSubtrail;
+};
+
+export default { getSubtrailAll, getSubtrail, createSubtrail, deleteSubtrail, updateSubtrail };

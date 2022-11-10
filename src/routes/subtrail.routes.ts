@@ -24,4 +24,9 @@ subtrailRoutes.delete(
   subtrailController.deleteSubtrail,
 );
 
+subtrailRoutes.put(
+  routeSubtrailId,
+  subtrailController.updateSubtrail,
+);
+
 export default subtrailRoutes;
