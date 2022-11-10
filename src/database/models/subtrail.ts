@@ -27,13 +27,13 @@ Subtrail.init({
 });
 
 Subtrail.belongsToMany(Content, {
-  through: 'subtrail_contents',
+  through: 'subTrail_contents',
   as: 'conteúdos',
   foreignKey: 'idSubtrail',
 });
 
 Content.belongsToMany(Subtrail, {
-  through: 'trail_subtrails',
+  through: 'subTrail_contents',
   as: 'SubTrilhas',
   foreignKey: 'idContent',
 });
