@@ -1,7 +1,11 @@
 import subtrail from '../database/models/subtrail';
 import content from '../database/models/content';
 
-// ****Dúvida****
+interface IBody {
+  name: string,
+  description: string,
+}
+
 // Get para todas subtrails
 const getSubtrailAll = async (): Promise<subtrail[]> => {
   const subtrails = await subtrail.findAll({
@@ -42,4 +46,13 @@ const getSubtrail = async (id: number): Promise<subtrail> => {
   return subtrailResult as subtrail;
 };
 
-export default { getSubtrailAll, getSubtrail };
+const createSubtrail = async (body: IBody) => {
+  const { name, description } = body;
+  const subtrailResult = await subtrail.create({
+    name,
+    description,
+  });
+  return subtrailResult;
+};
+
+export default { getSubtrailAll, getSubtrail, createSubtrail };

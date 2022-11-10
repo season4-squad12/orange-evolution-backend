@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import subtrailService from '../services/subtrail.service';
 
-// Dúvida
 // controle get de todas subtrilhas
 const getSubtrailAll = async (_req: Request, res: Response) => {
   const subtrails = await subtrailService.getSubtrailAll();
@@ -15,4 +14,9 @@ const getSubtrail = async (req: Request, res: Response) => {
   res.status(201).json(subtrail);
 };
 
-export default { getSubtrailAll, getSubtrail };
+const createSubtrail = async (req: Request, res: Response) => {
+  const trail = await subtrailService.createSubtrail(req.body);
+  res.status(201).json(trail);
+};
+
+export default { getSubtrailAll, getSubtrail, createSubtrail };
