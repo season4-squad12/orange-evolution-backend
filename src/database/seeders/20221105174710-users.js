@@ -18,7 +18,7 @@ module.exports = {
           name: 'Julia',
           lastName: 'Alves',
           email: 'juliaalves@email.com',
-          password: '1234',
+          password: '$2a$10$Xd1AkF9rDcQnyYAdg9tPG.A9z/aYBgcSByvc05joTrn/HoIHpYF0y',
           createdAt: '2022-11-06 02:04:35',
           role: 'student'
         }
