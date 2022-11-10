@@ -108,7 +108,7 @@ const createUser = async (trails: number[], body: IBody): Promise <User> => {
     });
   }
 
-  return newUser;
+  return getUser(idUser);
 };
 
 /* função responsável por atualizar um usuário, não atualiza os relacionamento do usuário e as trilhas,

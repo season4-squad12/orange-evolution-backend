@@ -3,6 +3,7 @@ import * as cors from 'cors';
 import userRoutes from './routes/user.routes';
 import trailRoutes from './routes/trail.routes';
 import subtrailRoutes from './routes/subtrail.routes';
+import loginRoutes from './routes/login.routes';
 
 const app = express();
 
@@ -19,5 +20,6 @@ app.use(cors());
 app.use(userRoutes);
 app.use(trailRoutes);
 app.use(subtrailRoutes);
+app.use(loginRoutes);
 
 export default app;
