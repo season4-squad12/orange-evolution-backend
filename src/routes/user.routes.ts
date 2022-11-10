@@ -20,6 +20,11 @@ userRoutes.get(
 );
 
 userRoutes.post(
+  '/usertrails',
+  controller.createAssociateUserTrail,
+);
+
+userRoutes.post(
   '/users',
   controller.createUser,
 );
