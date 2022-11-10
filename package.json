@@ -4,7 +4,7 @@
   "description": "projeto hackathon squad 12",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon 'ts-node src/index.ts' -e ts",
+    "dev": "nodemon src/index.ts -e ts",
     "start": "ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
