@@ -1,4 +1,4 @@
-buid:
+build:
   docker:
     web: Dockerfile
 run:
