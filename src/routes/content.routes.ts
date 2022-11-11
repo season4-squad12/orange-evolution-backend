@@ -24,4 +24,9 @@ contentRoutes.delete(
   contentController.deleteContent,
 );
 
+contentRoutes.put(
+  routeContentId,
+  contentController.updateContent,
+);
+
 export default contentRoutes;

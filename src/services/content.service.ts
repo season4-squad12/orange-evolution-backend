@@ -62,4 +62,15 @@ const deleteContent = async (id: number) => {
   return delContent;
 };
 
-export default { getContentAll, getContent, createContent, deleteContent };
+const updateContent = async (id: number, body: IBody) => {
+  const { name, description } = body;
+  const upContent = await content.update({
+    name,
+    description,
+  }, {
+    where: { id },
+  });
+  return upContent;
+};
+
+export default { getContentAll, getContent, createContent, deleteContent, updateContent };
