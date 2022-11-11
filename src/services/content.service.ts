@@ -1,8 +1,15 @@
 import content from '../database/models/content';
 
 interface IBody {
-  name: string,
+  title: string,
   description: string,
+  type: string,
+  author: string,
+  duration: string,
+  status: string,
+  link: string,
+  idUser: number,
+  experience: number,
 }
 
 const getContentAll = async (): Promise<content[]> => {
@@ -10,16 +17,6 @@ const getContentAll = async (): Promise<content[]> => {
     attributes: {
       exclude: ['createAt', 'updateAt'],
     },
-    include: [
-      {
-        model: content, // dúvida
-        as: 'conteúdos',
-        through: { attributes: [] },
-        attributes: {
-          exclude: ['createAt', 'updateAt'],
-        },
-      },
-    ],
   });
   return contents as content[];
 };
@@ -30,30 +27,27 @@ const getContent = async (id: number): Promise<content> => {
     attributes: {
       exclude: ['createdAt', 'updatedAt'],
     },
-    include: [
-      {
-        model: content,
-        as: 'conteúdos',
-        through: { attributes: [] },
-        attributes: {
-          exclude: ['createdAt', 'updatedAt'],
-        },
-      },
-    ],
   });
   return contentResult as content;
 };
 
-const createContent = async (body: IBody) => {
-  const { name, description } = body;
+const createContent = async (body: IBody): Promise<content> => {
+  const { title, description, type, author, duration, status, link, idUser, experience } = body;
   const contentResult = await content.create({
-    name,
+    title,
     description,
+    type,
+    author,
+    duration,
+    status,
+    link,
+    idUser,
+    experience,
   });
-  return contentResult;
+  return contentResult as content;
 };
 
-const deleteContent = async (id: number) => {
+const deleteContent = async (id: number): Promise<false | number> => {
   const contentResult = await content.findOne({ where: { id } });
   if (!contentResult) return false;
   const delContent = await content.destroy({
@@ -63,10 +57,17 @@ const deleteContent = async (id: number) => {
 };
 
 const updateContent = async (id: number, body: IBody) => {
-  const { name, description } = body;
+  const { title, description, type, author, duration, status, link, idUser, experience } = body;
   const upContent = await content.update({
-    name,
+    title,
     description,
+    type,
+    author,
+    duration,
+    status,
+    link,
+    idUser,
+    experience,
   }, {
     where: { id },
   });

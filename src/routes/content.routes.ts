@@ -6,7 +6,7 @@ const contentRoutes = Router();
 
 contentRoutes.get(
   '/contents',
-  contentController.getContentlAll,
+  contentController.getContentAll,
 );
 
 contentRoutes.get(
@@ -15,7 +15,7 @@ contentRoutes.get(
 );
 
 contentRoutes.post(
-  routeContentId,
+  '/contents',
   contentController.createContent,
 );
 
