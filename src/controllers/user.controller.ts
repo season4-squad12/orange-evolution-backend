@@ -12,12 +12,12 @@ interface QueryRole extends Request {
 }
 
 const getAllusers = async (_req: Request, res: Response) => {
-  /* try { */
-  const users = await userService.getUserAll();
-  res.status(201).json(users);
-  /* } catch (error) {
+  try {
+    const users = await userService.getUserAll();
+    res.status(201).json(users);
+  } catch (error) {
     res.status(500).json({ error: ResponseHTTP.errorServer });
-  } */
+  }
 };
 
 const getUser = async (req: Request, res: Response) => {
@@ -42,14 +42,21 @@ const getUserRole = async (req: QueryRole, res: Response) => {
   }
 };
 
-const createUser = async (req: Request, res: Response) => {
-  const { body } = req;
-  try {
-    const newUser = await userService.createUser(body);
-    res.status(201).json(newUser);
-  } catch (error) {
+const createAssociateUserTrail = async (req: Request, res: Response) => {
+  const { idUser, trails } = req.body;
+  /* try { */
+  const test = await userService.createAssociateUserTrail(idUser, trails);
+  // res.status(201).json({ success: 'Associates created with successfully' });
+  res.status(201).json(test);
+  /* } catch (error) {
     res.status(500).json({ error: ResponseHTTP.errorServer });
-  }
+  } */
+};
+
+const createUser = async (req: Request, res: Response) => {
+  const { trails, ...data } = req.body;
+  const newUser = await userService.createUser(trails, data);
+  res.status(201).json(newUser);
 };
 
 const updateUser = async (req: Request, res: Response) => {
@@ -73,4 +80,5 @@ const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
-export default { getAllusers, getUser, createUser, getUserRole, updateUser, deleteUser };
+export default {
+  getAllusers, getUser, createUser, getUserRole, updateUser, deleteUser, createAssociateUserTrail };

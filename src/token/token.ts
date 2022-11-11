@@ -27,7 +27,10 @@ const authToken = async (token: string) => {
   try {
     if (secret) {
       const decodec = jwt.verify(token, secret) as IData;
-      const user = await User.findAll({ where: { email: decodec.data.email } });
+      const user = await User.findOne({
+        where: { email: decodec.data.email },
+        attributes: { exclude: ['password'] },
+      });
       if (!user) return false;
       return {
         auth: true,

@@ -1,8 +1,9 @@
+require('dotenv').config();
 import { Sequelize } from "sequelize";
 
 const config = require('../config/config')
 
-const sequelize = new Sequelize(config.development.url);
+const sequelize = new Sequelize(config[`${process.env.NODE_ENV}`].url);
 
 /* try {
   sequelize.authenticate();
