@@ -1,5 +1,10 @@
 import content from '../database/models/content';
 
+interface IBody {
+  name: string,
+  description: string,
+}
+
 const getContentAll = async (): Promise<content[]> => {
   const contents = await content.findAll({
     attributes: {
@@ -7,7 +12,7 @@ const getContentAll = async (): Promise<content[]> => {
     },
     include: [
       {
-        model: content,
+        model: content, // dúvida
         as: 'conteúdos',
         through: { attributes: [] },
         attributes: {
@@ -39,4 +44,13 @@ const getContent = async (id: number): Promise<content> => {
   return contentResult as content;
 };
 
-export default { getContentAll, getContent };
+const createContent = async (body: IBody) => {
+  const { name, description } = body;
+  const contentResult = await content.create({
+    name,
+    description,
+  });
+  return contentResult;
+};
+
+export default { getContentAll, getContent, createContent };

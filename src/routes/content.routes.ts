@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import contentController from '../controllers/content.controller';
 
-const routeContent = '/contents/:id';
+const routeContentId = '/contents/:id';
 const contentRoutes = Router();
 
 contentRoutes.get(
@@ -10,8 +10,13 @@ contentRoutes.get(
 );
 
 contentRoutes.get(
-  routeContent,
+  routeContentId,
   contentController.getContent,
+);
+
+contentRoutes.post(
+  routeContentId,
+  contentController.createContent,
 );
 
 export default contentRoutes;

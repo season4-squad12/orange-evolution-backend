@@ -13,4 +13,9 @@ const getContent = async (req: Request, res: Response) => {
   res.status(201).json(content);
 };
 
-export default { getContentlAll, getContent };
+const createContent = async (req: Request, res: Response) => {
+  const content = await contentService.createContent(req.body);
+  res.status(201).json(content);
+};
+
+export default { getContentlAll, getContent, createContent };
