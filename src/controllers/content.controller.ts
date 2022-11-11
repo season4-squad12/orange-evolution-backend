@@ -17,5 +17,11 @@ const createContent = async (req: Request, res: Response) => {
   const content = await contentService.createContent(req.body);
   res.status(201).json(content);
 };
+const deleteContent = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const content = await contentService.deleteContent(Number(id));
+  if (content) res.status(201).json({ success: 'Content deleted successfully' });
+  res.status(404).json({ error: 'Trail not found' });
+};
 
-export default { getContentlAll, getContent, createContent };
+export default { getContentlAll, getContent, createContent, deleteContent };

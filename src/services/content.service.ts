@@ -53,4 +53,13 @@ const createContent = async (body: IBody) => {
   return contentResult;
 };
 
-export default { getContentAll, getContent, createContent };
+const deleteContent = async (id: number) => {
+  const contentResult = await content.findOne({ where: { id } });
+  if (!contentResult) return false;
+  const delContent = await content.destroy({
+    where: { id },
+  });
+  return delContent;
+};
+
+export default { getContentAll, getContent, createContent, deleteContent };

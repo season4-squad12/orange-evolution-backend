@@ -19,4 +19,9 @@ contentRoutes.post(
   contentController.createContent,
 );
 
+contentRoutes.delete(
+  routeContentId,
+  contentController.deleteContent,
+);
+
 export default contentRoutes;
