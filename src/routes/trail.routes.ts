@@ -13,6 +13,11 @@ trailRoutes.get(
 );
 
 trailRoutes.get(
+  '/trailshome',
+  trailController.getTrailAllHome,
+);
+
+trailRoutes.get(
   routeTrailId,
   verifyToken,
   trailController.getTrail,
