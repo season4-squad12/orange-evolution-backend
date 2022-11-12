@@ -10,6 +10,15 @@ const getTrailAll = async (_req: Request, res: Response) => {
   }
 };
 
+const getTrailAllHome = async (_req: Request, res: Response) => {
+  try {
+    const trails = await trailService.getTrailAllHome();
+    res.status(201).json(trails);
+  } catch (error) {
+    res.status(500).json({ error: 'internal server error' });
+  }
+};
+
 const getTrail = async (req: Request, res: Response) => {
   const { id } = req.params;
   const trail = await trailService.getTrail(Number(id));
@@ -36,4 +45,4 @@ const updateTrail = async (req: Request, res: Response) => {
   if (upTrail) res.status(201).json({ success: 'Trail update successfully' });
 };
 
-export default { getTrailAll, getTrail, createTrail, deleteTrail, updateTrail };
+export default { getTrailAll, getTrail, createTrail, deleteTrail, updateTrail, getTrailAllHome };

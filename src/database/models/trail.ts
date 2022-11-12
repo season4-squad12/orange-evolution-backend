@@ -19,6 +19,22 @@ Trail.init({
     type: STRING,
     allowNull: false,
   },
+  question: {
+    type: STRING,
+    allowNull: false,
+  },
+  response: {
+    type: STRING,
+    allowNull: false,
+  },
+  icone: {
+    type: STRING,
+    allowNull: false,
+  },
+  color: {
+    type: STRING,
+    allowNull: false,
+  },
 }, {
   sequelize: db,
   modelName: 'trail',

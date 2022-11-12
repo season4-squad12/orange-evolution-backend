@@ -4,6 +4,10 @@ import trail from '../database/models/trail';
 interface IBody {
   name: string,
   description: string,
+  question: string,
+  response: string,
+  icone: string,
+  color: string
 }
 
 const getTrailAll = async (): Promise<trail[]> => {
@@ -21,6 +25,15 @@ const getTrailAll = async (): Promise<trail[]> => {
         },
       },
     ],
+  });
+  return trails as trail[];
+};
+
+const getTrailAllHome = async (): Promise<trail[]> => {
+  const trails = await trail.findAll({
+    attributes: {
+      exclude: ['createdAt', 'updatedAt'],
+    },
   });
   return trails as trail[];
 };
@@ -74,4 +87,4 @@ const updateTrail = async (id: number, body: IBody) => {
   return upTrail;
 };
 
-export default { getTrailAll, getTrail, createTrail, deleteTrail, updateTrail };
+export default { getTrailAll, getTrail, createTrail, deleteTrail, updateTrail, getTrailAllHome };
