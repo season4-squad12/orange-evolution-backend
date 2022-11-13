@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import token from '../token/token';
+import token from '../token';
 
 const verifyTokenAdmin = async (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
