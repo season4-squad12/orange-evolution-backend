@@ -100,9 +100,9 @@ const createUser = async (trails: number[], body: IBody) => {
   const idUser = newUser.getDataValue('id');
   // se o array com ids de trilhas for maior que zero, será salvo o relacionamento na tabela de pivô
   if (trails.length > 0) {
-    trails.map(async (idTrail) => {
-      await UserTrail.create({ idUser, idTrail });
-    });
+    Promise.all(
+      trails.map(async (idTrail) => UserTrail.create({ idUser, idTrail })),
+    );
   }
   const user = await getUser(idUser);
   return { user, token: createToken(user) };
@@ -124,6 +124,18 @@ const updateUser = async (body: IBody, id: number) => {
 
 // função responsável por deletar um usuário específico
 const deleteUser = async (id: number) => {
+  const trails = await UserTrail.findAll({
+    where: {
+      idUser: id,
+    },
+  });
+
+  if (trails.length > 0) {
+    Promise.all(
+      trails.map(async (_trail) => UserTrail.destroy({ where: { idUser: id } })),
+    );
+  }
+
   const upUser = await User.destroy({ where: { id } });
   return upUser;
 };
