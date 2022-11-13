@@ -44,13 +44,13 @@ const getUserRole = async (req: QueryRole, res: Response) => {
 
 const createAssociateUserTrail = async (req: Request, res: Response) => {
   const { idUser, trails } = req.body;
-  /* try { */
-  const test = await userService.createAssociateUserTrail(idUser, trails);
-  // res.status(201).json({ success: 'Associates created with successfully' });
-  res.status(201).json(test);
-  /* } catch (error) {
+  try {
+    const test = await userService.createAssociateUserTrail(idUser, trails);
+    res.status(201).json({ success: 'Associates created with successfully' });
+    res.status(201).json(test);
+  } catch (error) {
     res.status(500).json({ error: ResponseHTTP.errorServer });
-  } */
+  }
 };
 
 const createUser = async (req: Request, res: Response) => {
