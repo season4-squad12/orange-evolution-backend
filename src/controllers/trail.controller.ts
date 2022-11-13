@@ -45,4 +45,19 @@ const updateTrail = async (req: Request, res: Response) => {
   if (upTrail) res.status(201).json({ success: 'Trail update successfully' });
 };
 
-export default { getTrailAll, getTrail, createTrail, deleteTrail, updateTrail, getTrailAllHome };
+const getTrailUser = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const trail = await trailService.getTrailUser(Number(id));
+  if (!trail) res.status(404).json({ error: 'Trail user not found' });
+  res.status(201).json(trail);
+};
+
+export default {
+  getTrailAll,
+  getTrail,
+  createTrail,
+  deleteTrail,
+  updateTrail,
+  getTrailAllHome,
+  getTrailUser,
+};

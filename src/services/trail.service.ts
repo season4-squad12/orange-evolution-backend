@@ -1,3 +1,4 @@
+import UserTrail from '../database/models/userTrail';
 import subtrails from '../database/models/subtrail';
 import trail from '../database/models/trail';
 
@@ -38,6 +39,7 @@ const getTrailAllHome = async (): Promise<trail[]> => {
   return trails as trail[];
 };
 
+// eslint-disable-next-line max-lines-per-function
 const getTrail = async (id: number): Promise<trail> => {
   const trailResult = await trail.findOne({
     where: { id },
@@ -87,4 +89,19 @@ const updateTrail = async (id: number, body: IBody) => {
   return upTrail;
 };
 
-export default { getTrailAll, getTrail, createTrail, deleteTrail, updateTrail, getTrailAllHome };
+const getTrailUser = async (id: number) => {
+  const user = await UserTrail.findAll({
+    where: {
+      idUser: id,
+    },
+  });
+  return user;
+};
+
+export default { getTrailAll,
+  getTrail,
+  createTrail,
+  deleteTrail,
+  updateTrail,
+  getTrailAllHome,
+  getTrailUser };
