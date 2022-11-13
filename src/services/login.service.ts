@@ -1,5 +1,5 @@
 import bcrypt = require('bcryptjs');
-import token from '../token/token';
+import { createToken, authToken } from '../token';
 import User from '../database/models/user';
 import userService from './user.service';
 
@@ -12,7 +12,7 @@ const logining = async (email:string, password: string) => {
 
   if (!verifyEmail) return false;
 
-  const resultToken = token.createToken(userResult);
+  const resultToken = createToken(userResult);
 
   const user = await userService.getUser(userResult.getDataValue('id'));
 
@@ -23,7 +23,7 @@ const logining = async (email:string, password: string) => {
 };
 
 const validateLogin = async (tokenReq: string) => {
-  const validate = await token.authToken(tokenReq);
+  const validate = await authToken(tokenReq);
   return validate;
 };
 
