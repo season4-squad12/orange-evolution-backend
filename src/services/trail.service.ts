@@ -1,5 +1,6 @@
 import subtrails from '../database/models/subtrail';
 import trail from '../database/models/trail';
+import userService from './user.service';
 
 interface IBody {
   name: string,
@@ -87,4 +88,20 @@ const updateTrail = async (id: number, body: IBody) => {
   return upTrail;
 };
 
-export default { getTrailAll, getTrail, createTrail, deleteTrail, updateTrail, getTrailAllHome };
+const getTrailAndSubtrail = async (idTrails: number[]): Promise <trail[]> => {
+  const trails = await Promise.all(idTrails.map((ids: number) => getTrail(ids)));
+  return trails as trail[];
+};
+
+const getTrailUserAll = async (id:number) => {
+  const user = await userService.getUser(id);
+  const trilhas = user.getDataValue('trilhas');
+
+  const idTrails = trilhas.map((trilha: { id: number; }) => trilha.id);
+
+  const trails = await getTrailAndSubtrail(idTrails);
+  return trails;
+};
+
+export default {
+  getTrailAll, getTrail, createTrail, deleteTrail, updateTrail, getTrailAllHome, getTrailUserAll };
