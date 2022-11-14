@@ -42,8 +42,8 @@ trailRoutes.post(
 );
 
 trailRoutes.get(
-  '/user-trails/:id',
-  trailController.getTrailUser,
+  '/trails-user/:id',
+  trailController.getTrailUserAll,
 );
 
 export default trailRoutes;
