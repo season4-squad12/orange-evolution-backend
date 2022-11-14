@@ -53,5 +53,11 @@ const getTrailUserAll = async (req: Request, res: Response) => {
 };
 
 export default {
-  getTrailAll, getTrail, createTrail, deleteTrail, updateTrail, getTrailAllHome, getTrailUserAll,
+  getTrailAll,
+  getTrail,
+  createTrail,
+  deleteTrail,
+  updateTrail,
+  getTrailAllHome,
+  getTrailUserAll,
 };

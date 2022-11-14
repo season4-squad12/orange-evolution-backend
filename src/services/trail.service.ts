@@ -39,6 +39,7 @@ const getTrailAllHome = async (): Promise<trail[]> => {
   return trails as trail[];
 };
 
+// eslint-disable-next-line max-lines-per-function
 const getTrail = async (id: number): Promise<trail> => {
   const trailResult = await trail.findOne({
     where: { id },
@@ -103,5 +104,12 @@ const getTrailUserAll = async (id:number) => {
   return trails;
 };
 
+
 export default {
-  getTrailAll, getTrail, createTrail, deleteTrail, updateTrail, getTrailAllHome, getTrailUserAll };
+export default { getTrailAll,
+  getTrail,
+  createTrail,
+  deleteTrail,
+  updateTrail,
+  getTrailAllHome,
+  getTrailUserAll };
