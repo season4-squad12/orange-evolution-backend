@@ -14,7 +14,7 @@ interface IData {
   }
 }
 
-const createToken = (user: User) => {
+export const createToken = (user: User) => {
   const secret = process.env.SECRET_KEY;
   if (secret) {
     const token = jwt.sign({ data: user }, secret, { expiresIn: '7d', algorithm: 'HS256' });
@@ -22,7 +22,7 @@ const createToken = (user: User) => {
   }
 };
 
-const authToken = async (token: string) => {
+export const authToken = async (token: string) => {
   const secret = process.env.SECRET_KEY;
   try {
     if (secret) {
@@ -41,5 +41,3 @@ const authToken = async (token: string) => {
     return false;
   }
 };
-
-export default { createToken, authToken };

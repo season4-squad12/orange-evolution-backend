@@ -3,16 +3,20 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('user_trails', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
       idUser: {
         type: Sequelize.INTEGER,
         references: { model: 'users', key: 'id' },
-        onDelete: 'CASCADE',
         allowNull: false,
       },
       idTrail: {
         type: Sequelize.INTEGER,
         references: { model: 'trails', key: 'id' },
-        onDelete: 'CASCADE',
         allowNull: false,
       },
     });

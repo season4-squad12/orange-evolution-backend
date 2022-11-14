@@ -2,6 +2,7 @@ import { genSalt, hash } from 'bcryptjs';
 import Trail from '../database/models/trail';
 import User from '../database/models/user';
 import UserTrail from '../database/models/userTrail';
+import { createToken } from '../token';
 
 interface IBody {
   name: string,
@@ -85,12 +86,10 @@ const createAssociateUserTrail = async (idUser: number, trails: number[]) => {
 };
 
 // função responsável criar um usuário e também é possivel passar ids de trilhas e fazer o relacionamento de uma só vez
-const createUser = async (trails: number[], body: IBody): Promise <User> => {
+const createUser = async (trails: number[], body: IBody) => {
   const { name, lastName, email, password, role } = body;
-
   const salt = await genSalt(10);
   const newPassword = await hash(password, salt);
-
   const newUser = await User.create({
     name,
     lastName,
@@ -98,17 +97,15 @@ const createUser = async (trails: number[], body: IBody): Promise <User> => {
     password: newPassword,
     role,
   });
-
   const idUser = newUser.getDataValue('id');
-
   // se o array com ids de trilhas for maior que zero, será salvo o relacionamento na tabela de pivô
   if (trails.length > 0) {
-    trails.map(async (idTrail) => {
-      await UserTrail.create({ idUser, idTrail });
-    });
+    Promise.all(
+      trails.map(async (idTrail) => UserTrail.create({ idUser, idTrail })),
+    );
   }
-
-  return getUser(idUser);
+  const user = await getUser(idUser);
+  return { user, token: createToken(user) };
 };
 
 /* função responsável por atualizar um usuário, não atualiza os relacionamento do usuário e as trilhas,
@@ -127,6 +124,18 @@ const updateUser = async (body: IBody, id: number) => {
 
 // função responsável por deletar um usuário específico
 const deleteUser = async (id: number) => {
+  const trails = await UserTrail.findAll({
+    where: {
+      idUser: id,
+    },
+  });
+
+  if (trails.length > 0) {
+    Promise.all(
+      trails.map(async (_trail) => UserTrail.destroy({ where: { idUser: id } })),
+    );
+  }
+
   const upUser = await User.destroy({ where: { id } });
   return upUser;
 };
