@@ -104,6 +104,8 @@ const getTrailUserAll = async (id:number) => {
   return trails;
 };
 
+
+export default {
 export default { getTrailAll,
   getTrail,
   createTrail,

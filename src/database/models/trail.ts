@@ -3,7 +3,8 @@ import { Model, INTEGER, STRING } from 'sequelize';
 import db from '.';
 import Subtrail from './subtrail';
 
-class Trail extends Model {}
+class Trail extends Model {
+}
 Trail.init({
   id: {
     type: INTEGER,
