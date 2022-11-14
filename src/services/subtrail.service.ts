@@ -14,7 +14,7 @@ const getSubtrailAll = async (): Promise<subtrail[]> => {
     include: [
       {
         model: content,
-        as: 'conteúdos',
+        as: 'conteudos',
         through: { attributes: [] },
         attributes: {
           exclude: ['createAt', 'updateAt'],
@@ -34,7 +34,7 @@ const getSubtrail = async (id: number): Promise<subtrail> => {
     include: [
       {
         model: content,
-        as: 'conteúdos',
+        as: 'conteudos',
         through: { attributes: [] },
         attributes: {
           exclude: ['createdAt', 'updatedAt'],

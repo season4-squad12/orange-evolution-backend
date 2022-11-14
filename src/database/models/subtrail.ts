@@ -28,7 +28,7 @@ Subtrail.init({
 
 Subtrail.belongsToMany(Content, {
   through: 'subTrail_contents',
-  as: 'conteúdos',
+  as: 'conteudos',
   foreignKey: 'idSubtrail',
 });
 
