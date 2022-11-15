@@ -3,7 +3,12 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('trail_subtrails', {
-      
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
       idTrail: {
         type: Sequelize.INTEGER,
         references: { model: 'trails', key: 'id' },

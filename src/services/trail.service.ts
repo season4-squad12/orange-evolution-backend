@@ -61,11 +61,17 @@ const getTrail = async (id: number): Promise<trail> => {
 };
 
 const createTrail = async (body: IBody) => {
-  const { name, description } = body;
+  const { name, description, question, response, icone, color } = body;
+
   const trailResult = await trail.create({
     name,
     description,
+    question,
+    response,
+    icone,
+    color,
   });
+
   return trailResult;
 };
 
@@ -79,10 +85,14 @@ const deleteTrail = async (id: number) => {
 };
 
 const updateTrail = async (id: number, body: IBody) => {
-  const { name, description } = body;
+  const { name, description, question, response, icone, color } = body;
   const upTrail = await trail.update({
     name,
     description,
+    question,
+    response,
+    icone,
+    color,
   }, {
     where: { id },
   });

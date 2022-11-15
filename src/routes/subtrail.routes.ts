@@ -36,4 +36,10 @@ subtrailRoutes.put(
   subtrailController.updateSubtrail,
 );
 
+subtrailRoutes.post(
+  '/trailsubtrails',
+  verifyToken,
+  subtrailController.createAssociateTrailSubtrail,
+);
+
 export default subtrailRoutes;
