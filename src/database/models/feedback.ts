@@ -29,11 +29,11 @@ Feedback.init({
   },
 }, {
   sequelize: db,
-  modelName: 'content',
+  modelName: 'message_feedbacks',
   timestamps: true,
 });
 
 Feedback.hasMany(User, { foreignKey: 'idUser' });
-User.belongsTo(User, { foreignKey: 'idUser' });
+User.belongsTo(Feedback, { foreignKey: 'idUser' });
 
 export default Feedback;
