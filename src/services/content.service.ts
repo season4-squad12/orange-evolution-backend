@@ -1,3 +1,4 @@
+import subtrailContent from '../database/models/subTrailContents';
 import content from '../database/models/content';
 
 interface IBody {
@@ -10,6 +11,7 @@ interface IBody {
   link: string,
   idUser: number,
   experience: number,
+  idSubtrail: number,
 }
 
 const getContentAll = async (): Promise<content[]> => {
@@ -31,6 +33,12 @@ const getContent = async (id: number): Promise<content> => {
   return contentResult as content;
 };
 
+const createAssociateSubtrailContent = async (idSubtrail: number, idContent: number) => {
+  const exists = await subtrailContent.findOne({ where: { idSubtrail, idContent } });
+  if (exists) {
+    await subtrailContent.create({ idSubtrail, idContent });
+  }
+};
 const createContent = async (body: IBody): Promise<content> => {
   const { title, description, type, author, duration, status, link, idUser, experience } = body;
   const contentResult = await content.create({
@@ -57,7 +65,9 @@ const deleteContent = async (id: number): Promise<false | number> => {
 };
 
 const updateContent = async (id: number, body: IBody) => {
-  const { title, description, type, author, duration, status, link, idUser, experience } = body;
+  const { title, description,
+    type, author, duration, status, link, idUser, experience, idSubtrail,
+  } = body;
   const upContent = await content.update({
     title,
     description,
@@ -71,7 +81,17 @@ const updateContent = async (id: number, body: IBody) => {
   }, {
     where: { id },
   });
+
+  if (upContent) await createAssociateSubtrailContent(id, idSubtrail);
+
   return upContent;
 };
 
-export default { getContentAll, getContent, createContent, deleteContent, updateContent };
+export default {
+  getContentAll,
+  getContent,
+  createContent,
+  deleteContent,
+  updateContent,
+  createAssociateSubtrailContent,
+};

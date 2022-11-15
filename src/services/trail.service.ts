@@ -1,8 +1,6 @@
-import trailSubtrail from '../database/models/trailSubtrail';
 import subtrails from '../database/models/subtrail';
 import trail from '../database/models/trail';
 import userService from './user.service';
-import TrailSubtrail from '../database/models/trailSubtrail';
 
 interface IBody {
   name: string,
@@ -87,10 +85,14 @@ const deleteTrail = async (id: number) => {
 };
 
 const updateTrail = async (id: number, body: IBody) => {
-  const { name, description } = body;
+  const { name, description, question, response, icone, color } = body;
   const upTrail = await trail.update({
     name,
     description,
+    question,
+    response,
+    icone,
+    color,
   }, {
     where: { id },
   });

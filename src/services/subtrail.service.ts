@@ -80,13 +80,16 @@ const deleteSubtrail = async (id: number) => {
 };
 
 const updateSubtrail = async (id: number, body: IBody) => {
-  const { name, description } = body;
+  const { name, description, idTrail } = body;
   const upSubtrail = await subtrail.update({
     name,
     description,
   }, {
     where: { id },
   });
+
+  if (upSubtrail) await createAssociateTrailSubtrail(id, idTrail);
+
   return upSubtrail;
 };
 
