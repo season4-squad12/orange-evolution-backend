@@ -60,6 +60,10 @@ const getTrail = async (id: number): Promise<trail> => {
   return trailResult as trail;
 };
 
+/* const createAssociateTrailSubtrail = async (idTrail: number, idSubTrail: number) => {
+  const  exists = await TrailSubtrail.findOne({ where})
+}; */
+
 const createTrail = async (body: IBody) => {
   const { name, description } = body;
   const trailResult = await trail.create({
