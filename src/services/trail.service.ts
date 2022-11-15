@@ -1,6 +1,8 @@
+import trailSubtrail from '../database/models/trailSubtrail';
 import subtrails from '../database/models/subtrail';
 import trail from '../database/models/trail';
 import userService from './user.service';
+import TrailSubtrail from '../database/models/trailSubtrail';
 
 interface IBody {
   name: string,
@@ -60,16 +62,18 @@ const getTrail = async (id: number): Promise<trail> => {
   return trailResult as trail;
 };
 
-/* const createAssociateTrailSubtrail = async (idTrail: number, idSubTrail: number) => {
-  const  exists = await TrailSubtrail.findOne({ where})
-}; */
-
 const createTrail = async (body: IBody) => {
-  const { name, description } = body;
+  const { name, description, question, response, icone, color } = body;
+
   const trailResult = await trail.create({
     name,
     description,
+    question,
+    response,
+    icone,
+    color,
   });
+
   return trailResult;
 };
 

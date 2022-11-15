@@ -2,9 +2,9 @@
 import { Model, INTEGER } from 'sequelize';
 import db from '.';
 
-class UserTrail extends Model {}
+class SubtrailContent extends Model {}
 
-UserTrail.init({
+SubtrailContent.init({
   idSubTrail: {
     type: INTEGER,
     allowNull: false,
@@ -19,3 +19,5 @@ UserTrail.init({
   modelName: 'subTrail_contents',
   timestamps: false,
 });
+
+export default SubtrailContent;

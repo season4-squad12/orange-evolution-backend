@@ -1,9 +1,11 @@
+import trailSubtrail from '../database/models/trailSubtrail';
 import subtrail from '../database/models/subtrail';
 import content from '../database/models/content';
 
 interface IBody {
   name: string,
   description: string,
+  idTrail: number
 }
 
 const getSubtrailAll = async (): Promise<subtrail[]> => {
@@ -45,12 +47,26 @@ const getSubtrail = async (id: number): Promise<subtrail> => {
   return subtrailResult as subtrail;
 };
 
+const createAssociateTrailSubtrail = async (idTrail: number, idSubtrail: number) => {
+  const exists = await trailSubtrail.findOne({ where: { idTrail, idSubtrail } });
+  if (!exists) {
+    await trailSubtrail.create({ idTrail, idSubtrail });
+  }
+};
+
 const createSubtrail = async (body: IBody) => {
-  const { name, description } = body;
+  const { name, description, idTrail } = body;
   const subtrailResult = await subtrail.create({
     name,
     description,
   });
+
+  const idSubtrail = subtrailResult.getDataValue('id');
+
+  if (subtrailResult) {
+    await trailSubtrail.create({ idTrail, idSubtrail });
+  }
+
   return subtrailResult;
 };
 
@@ -74,4 +90,11 @@ const updateSubtrail = async (id: number, body: IBody) => {
   return upSubtrail;
 };
 
-export default { getSubtrailAll, getSubtrail, createSubtrail, deleteSubtrail, updateSubtrail };
+export default {
+  getSubtrailAll,
+  getSubtrail,
+  createSubtrail,
+  deleteSubtrail,
+  updateSubtrail,
+  createAssociateTrailSubtrail,
+};
