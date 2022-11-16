@@ -12,7 +12,7 @@
 
 <h2 id="sobre">Sobre</h2>
   
-  <p>O Orange Evolution é a plataforma ideal para quem busca se tornar um #SangueLaranja, dando os primeiros passos ou se aprimorando varias áreas de conhecimento, com conteúdos de qualidade criados com muito carinho e disponibilizados de forma gratuita!</p>
+  <p>O Orange Evolution é a plataforma ideal para quem busca se tornar um #SangueLaranja, dando os primeiros passos ou se aprimorando em várias áreas de conhecimento, com conteúdos de qualidade criados com muito carinho e disponibilizados de forma gratuita!</p>
   <p>A plataforma foi construída pelo Squad 12 durante o Hackathon do Programa de Formação Season 4, da FCamara.</p>
   
 <h2 id="especificacoes">Especificações</h2>
